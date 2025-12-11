@@ -18,7 +18,7 @@
           <a class="nav-link" href="/board/register">Board Register</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Board List</a>
+          <a class="nav-link" href="/board/list">Board List</a>
         </li>
       </ul>
     </div>

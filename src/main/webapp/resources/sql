@@ -24,3 +24,66 @@ reg_date datetime default now(),
 read_count int default 0,
 primary key(bno)
 );
+
+--25-12-08
+create table comment(
+cno bigint auto_increment,
+bno bigint not null,
+writer varchar(200) not null,
+content text,
+reg_date datetime default now(),
+primary key(cno)
+);
+
+--25-12-09
+-- board 댓글 개수를 집계하는 칼럼을 추가
+alter table board add cmt_qty int default 0;
+-- 현재 들어간 댓글 갯수 집계
+update board b
+join (
+    select bno, count(*) as cnt
+    from comment
+    group by bno
+) c on b.bno = c.bno
+set b.cmt_qty = c.cnt;
+
+-- 25-12-10
+create table file(
+uuid varchar(256) not null,
+save_dir varchar(256) not null,
+file_name varchar(256) not null,
+file_type tinyint(1) default 0,
+bno bigint not null,
+file_size bigint,
+reg_date datetime default now(),
+primary key(uuid)
+);
+
+--25-12-11
+-- board 테이블에 파일의 개수를 집계하는 칼럼을 추가
+alter table board add file_qty int default 0;
+
+-- 현재 들어가있는 파일의 개수 집계
+update board b set file_qty = (
+select count(uuid) from file f
+where b.bno = f.bno
+);
+
+-- user table 생성
+create table user(
+email varchar(256),
+pwd varchar(256) not null,
+nick_name varchar(200),
+reg_date datetime default now(),
+last_login datetime default now(),
+primary key(email)
+);
+
+-- 권한 테이블 생성 ADMIN + USER + MANAGER
+-- ROLE_ADMIN / ROLE_USER / ROLE_MANAGER
+create table auth(
+id bigint auto_increment,
+email varchar(256) not null,
+auth varchar(256) not null,
+primary key(id)
+);
