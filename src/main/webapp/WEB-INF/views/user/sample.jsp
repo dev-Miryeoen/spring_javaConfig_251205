@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:include page="../layout/header.jsp" />
-	<div class="container-sm">
+	<div class="container-sm p-5 mb-5">
 		
 	</div>
 <jsp:include page="../layout/footer.jsp" />

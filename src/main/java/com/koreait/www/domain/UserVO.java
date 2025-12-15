@@ -17,7 +17,7 @@ public class UserVO {
 	
 	private String email;
 	private String pwd;
-	private String nick_name;
+	private String nickName;
 	private String regDate;
 	private String lastLogin;
 	private List<AuthVO> authList;

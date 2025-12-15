@@ -18,7 +18,8 @@ import org.springframework.web.servlet.view.JstlView;
 		"com.koreait.www.controller",
 		"com.koreait.www.service",
 		"com.koreait.www.handler",
-		"com.koreait.www.security"
+		"com.koreait.www.security",
+		"com.koreait.www.exception"
 })
 @EnableWebMvc
 @EnableScheduling

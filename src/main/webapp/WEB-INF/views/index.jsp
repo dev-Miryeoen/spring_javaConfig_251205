@@ -10,4 +10,20 @@
 		
 		<P>  The time on the server is ${serverTime}. </P>
 	</div>
+	<script type="text/javascript">
+		const modify_msg = `<c:out value="${modify_msg}" />`;
+		console.log(modify_msg);
+		if(modify_msg==="ok"){
+			alert("회원정보가 수정되었습니다. 다시 로그인 해 주세요.");
+		}
+		
+		const remove_msg = `<c:out value="${remove_msg}" />`;
+		console.log(remove_msg);
+		if(remove_msg==="ok"){
+			alert("화원탈퇴가 완료되었습니다.");
+		}
+		if(remove_msg==="fail"){
+			alert("화원탈퇴가 실패하였습니다. 다시 시도해주세요.");			
+		}
+	</script>
 <jsp:include page="layout/footer.jsp" />

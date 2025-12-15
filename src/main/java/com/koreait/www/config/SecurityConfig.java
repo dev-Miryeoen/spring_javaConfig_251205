@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.security.web.authentication.AuthenticationSuccessHandler;
+import org.springframework.security.web.csrf.CsrfFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
 
 import com.koreait.www.security.CustomAuthUserService;
 import com.koreait.www.security.LoginFailureHandler;
@@ -63,8 +65,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// 클라이언트 -> 서버 요청을 봅낼 때 csrf 토큰을 함께 전송
 		// get mapping은 토큰 전송이 불필요 (서버에서 일방적으로 데이터를 보내는 mapping)
 		// post, put, delete 토큰 전송 필요
-		http.csrf().disable(); // 공격에 대한 방어 시스템 풀기
 		
+//		http.csrf().disable(); // 공격에 대한 방어 시스템 풀기
+		CharacterEncodingFilter encoding = new CharacterEncodingFilter();
+		encoding.setEncoding("utf-8");
+		encoding.setForceEncoding(true);
+		http.addFilterBefore(encoding, CsrfFilter.class);
 		// 권한에 따른 승인 요청
 		// antMatchers : 접근을 허용하는 경로
 		// hasRole("권한") : 해당 권한 확인 => ROLE_ 포함 => ROLE_ADMIN
@@ -72,17 +78,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		// permitAll() : 누구나 접근 가능한 경로
 		http.authorizeRequests()
 			.antMatchers("/user/list").hasRole("ADMIN")
-//			.antMatchers("/",
-//						 "/user/login",
-//						 "/user/register",
-//						 "/board/list",
-//						 "/board/detail",
-//						 "/resources/**",
-//						 "/upload/**",
-//						 "/comment/list/**"
-//						 ).permitAll()
-//			.anyRequest().authenticated();
-			.anyRequest().permitAll();
+			.antMatchers("/",
+						 "/user/login",
+						 "/user/register",
+						 "/user/insert",
+						 "/board/list",
+						 "/board/detail",
+						 "/resources/**",
+						 "/upload/**",
+						 "/comment/list/**"
+						 ).permitAll()
+			.anyRequest().authenticated();
+//			.anyRequest().permitAll();
 		
 		// 로그인 페이지 구성
 		// username => email / password => pwd

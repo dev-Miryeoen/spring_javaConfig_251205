@@ -10,6 +10,8 @@
 		<c:set value="${boardFileDTO.board }" var="board" />
 		
 		<form action="/board/update" method="post" enctype="multipart/form-data">
+			<!-- CSRF 토큰 추가 -->
+			<input type="hidden" name="${_csrf.parameterName }" value="${_csrf.token }">
 			<div class="mb-3">
 			  <label for="b" class="form-label">Bno</label>
 			  <input type="text" class="form-control" id="b" name="bno" value="${board.bno }" readonly>

@@ -78,6 +78,8 @@ public class BoardServiceImpl implements BoardService{
 	public int update(BoardFileDTO boardFileDTO) {
 		// TODO Auto-generated method stub
 		int isOk = bdao.update(boardFileDTO.getBoard());
+		// 수정 후 detail로 가면 readCount _1 => 미리 감소
+		isOk *= bdao.readCountUp(boardFileDTO.getBoard().getBno(), -1);
 		if(boardFileDTO.getFlist() == null) {
 			return isOk;
 		}
@@ -87,6 +89,7 @@ public class BoardServiceImpl implements BoardService{
 				isOk *= fdao.insertFile(fvo);
 			}
 			isOk *= bdao.fileQtyUpdate(boardFileDTO.getBoard().getBno(), boardFileDTO.getFlist().size());
+			
 		}
 		return isOk;
 	}
