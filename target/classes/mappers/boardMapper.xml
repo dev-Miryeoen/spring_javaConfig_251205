@@ -6,8 +6,8 @@
   <!-- namespace = dao interface의 이름 id = 메서드명 -->
   
   <insert id="insert">
-  	insert into board(title, writer, content)
-  	values(#{title},#{writer},#{content})
+  	insert into board(title, writer, content, email)
+  	values(#{title},#{writer},#{content}, #{email})
   </insert>
   <select id="getList" resultType="com.koreait.www.domain.BoardVO">
   	<!-- select * from board where is_del='N' order by bno desc 

@@ -48,11 +48,11 @@ function spreadCommentList(bno, page=1){
             for(let cvo of result.cmtList){
                 li += `<li class="list-group-item" data-cno="${cvo.cno}">`;
                 li += `<div class="mb-3">`;
-                li += `<div class="fw-bold">${cvo.writer}</div>`;
+                li += `<div class="fw-bold mb-1 cus-color">${cvo.writer}</div>`;
                 li += `${cvo.content}`;
                 li += `</div>`;
                 li += `<span class="badge text-bg-primary">${cvo.regDate}</span>`;
-                if(loginNick === cvo.writer){
+                if(loginEmail === cvo.email){
                     li += `<button type="button" class="btn btn-outline-warning btn-sm mod" data-bs-toggle="modal" data-bs-target="#cmtModal">%</button>`;
                     li += `<button type="button" class="btn btn-outline-danger btn-sm del">x</button>`;
                 }

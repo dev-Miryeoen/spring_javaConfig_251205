@@ -15,10 +15,12 @@ public class BoardVO {
 	private long bno;
 	private String title;
 	private String writer;
+	private String userName;
 	private String content;
 	private String isDel;
 	private String regdate;
 	private int readCount;
 	private int cmtQty;
 	private int fileQty;
+	private String email;
 }

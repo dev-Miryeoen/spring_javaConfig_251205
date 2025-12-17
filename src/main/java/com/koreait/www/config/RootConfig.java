@@ -25,10 +25,8 @@ import com.zaxxer.hikari.HikariDataSource;
 @PropertySource("classpath:database.properties")
 @Configuration
 public class RootConfig {
-	
 	@Autowired
 	ApplicationContext applicationContext;
-
 	// @value properties 파일의 값을 주입
 	@Value("${db.driverClassName}")
 	private String driverClassName;

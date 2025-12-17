@@ -87,3 +87,10 @@ email varchar(256) not null,
 auth varchar(256) not null,
 primary key(id)
 );
+--25-12-16
+-- board 테이블에 email 칼럼 추가(작성자를 nickname으로 사용했을 시 변경했을때 수정이 불가함)
+alter table board add email varchar(256) not null;
+-- board 테이블 email을 user의 email과 동일하게
+update board b
+join user u on b.writer = u.nick_name
+set b.email = u.email;

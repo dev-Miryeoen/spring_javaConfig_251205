@@ -5,10 +5,11 @@
 
 <jsp:include page="../layout/header.jsp" />
 	<div class="container-sm p-5">
-		<h3>Board Register Page</h3>
+		<h3>글 등록</h3>
 		
 		<!-- 로그인이 되었을 때만 들어올 수 있는 페이지 -->
 		<sec:authentication property="principal.userVO.nickName" var="authNick" />
+		<sec:authentication property="principal.userVO.email" var="authEmail" />
 		
 		<form action="/board/insert" method="post" enctype="multipart/form-data">
 			<!-- CSRF 토큰 추가 -->
@@ -20,6 +21,7 @@
 			<div class="mb-3">
 			  <label for="w" class="form-label">Writer</label>
 			  <input type="text" class="form-control" id="w" name="writer" value="${authNick }" readonly>
+			  <input type="hidden" name="email" value="${authEmail }">
 			</div>
 			<div class="mb-3">
 			  <label for="c" class="form-label">Content</label>

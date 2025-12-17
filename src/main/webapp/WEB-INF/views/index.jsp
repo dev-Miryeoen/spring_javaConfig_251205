@@ -3,12 +3,16 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 
 <jsp:include page="layout/header.jsp" />
-	<div class="container-sm p-5">
-		<h1>
-			Hello world!  
-		</h1>
+	<div class="container-sm p-5 mainContainer">
 		
-		<P>  The time on the server is ${serverTime}. </P>
+		<div>
+			<a href="/board/register">글쓰기</a>
+		</div>
+		<div>
+			<a href="/board/list">글목록</a>
+		</div>
+		
+		<p class="mainTime">${serverTime}.</p>
 	</div>
 	<script type="text/javascript">
 		const modify_msg = `<c:out value="${modify_msg}" />`;

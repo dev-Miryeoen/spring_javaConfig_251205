@@ -3,7 +3,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <jsp:include page="../layout/header.jsp" />
 	<div class="container-sm p-5 mb-5">
-		<h3>User List Page</h3>
+		<h3>유저명단</h3>
 		<div class="row justify-content-start">
 			<!-- 이 페이지는 ADMIN 로그인이 되어있어야지만 접근할 수 있는 페이지 -->
 			<c:forEach items="${userList }" var="user">

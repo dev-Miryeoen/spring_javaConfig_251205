@@ -4,35 +4,41 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 
 <jsp:include page="../layout/header.jsp" />
-	<div class="container-sm p-5 mb-5">
-		<h3>Board Detail Page</h3>
+	<div class="container-sm p-5 mb-5 detailBox">
+		<h3>글 상세</h3>
 		
 		<!-- 값을 저장하는 변수처럼 사용 -->
 		<c:set value="${boardFileDTO.board }" var="board" />
-		
-		<div class="mb-3">
-		  <label for="b" class="form-label">Bno</label>
-		  <input type="text" class="form-control" id="b" name="bno" value="${board.bno }" readonly>
+		<div class="d-flex detail-inputBx-container">
+			<div class="mb-3 inputBx">
+			  <label for="b">No.</label>
+			  <input type="text" class="form-control" id="b" name="bno" value="${board.bno }" readonly>
+			  <span></span>
+			</div>
+			<div class="mb-3 inputBx">
+			  <label for="t">Title.</label>
+			  <input type="text" class="form-control" id="t" name="title" value="${board.title }" readonly>
+			  <span></span>
+			</div>
+			<div class="mb-3 inputBx">
+			  <label for="w">Writer</label>
+			  <input type="text" class="form-control" id="w" name="writer" value="${board.writer }" readonly>
+			  <span></span>
+			</div>
+			<div class="mb-3 inputBx">
+			  <label for="r">Date.</label>
+			  <input type="text" class="form-control" id="r" name="regdate" value="${board.regdate }" readonly>
+			  <span></span>
+			</div>
+			<div class="mb-3 inputBx">
+			  <label for="rc">Count.</label>
+			  <input type="text" class="form-control" id="rc" name="readCount" value="${board.readCount }" readonly>
+			  <span></span>
+			</div>
 		</div>
-		<div class="mb-3">
-		  <label for="t" class="form-label">Title</label>
-		  <input type="text" class="form-control" id="t" name="title" value="${board.title }" readonly>
-		</div>
-		<div class="mb-3">
-		  <label for="w" class="form-label">Writer</label>
-		  <input type="text" class="form-control" id="w" name="writer" value="${board.writer }" readonly>
-		</div>
-		<div class="mb-3">
-		  <label for="r" class="form-label">regDate</label>
-		  <input type="text" class="form-control" id="r" name="regdate" value="${board.regdate }" readonly>
-		</div>
-		<div class="mb-3">
-		  <label for="rc" class="form-label">readCount</label>
-		  <input type="text" class="form-control" id="rc" name="readCount" value="${board.readCount }" readonly>
-		</div>
-		<div class="mb-3">
-		  <label for="c" class="form-label">Content</label>
+		<div class="mb-3 inputBx w-100">
 		  <textarea class="form-control" id="c" name="content" rows="3" readonly>${board.content }</textarea>
+		  <span></span>
 		</div>
 		
 		<!-- file print -->
@@ -66,23 +72,30 @@
 		  	</c:forEach>
 		  </ul>
 		</div>
-		
-		<a href="/board/list"><button type="button" class="btn btn-primary">list</button></a>
-		<sec:authorize access="isAuthenticated()">
-			<sec:authentication property="principal.userVO.nickName" var="authNick" />
-			<c:if test="${board.writer eq authNick }">
-				<a href="/board/modify?bno=${board.bno }"><button type="button" class="btn btn-warning">modify</button></a>
-				<a href="/board/delete?bno=${board.bno }"><button type="button" class="btn btn-danger">delete</button></a>
-			</c:if>
-		</sec:authorize>
+		<div class="d-flex justify-content-end">
+			<a href="/board/list"><button type="button" class="btn btn-primary">list</button></a>
+			<sec:authorize access="isAuthenticated()">
+				<sec:authentication property="principal.userVO.nickName" var="authNick" />
+				<sec:authentication property="principal.userVO.email" var="authEmail" />
+				<c:if test="${board.email eq authEmail }">
+					<a href="/board/modify?bno=${board.bno }"><button type="button" class="btn btn-warning">modify</button></a>
+					<a href="/board/delete?bno=${board.bno }"><button type="button" class="btn btn-danger">delete</button></a>
+				</c:if>
+			</sec:authorize>
+		</div>
 		
 		<!-- comment -->
 		<!-- post -->
 		<sec:authorize access="isAuthenticated()">
-			<div class="input-group mb-3 my-3">
-			  <span class="input-group-text" id="cmtWriter">${authNick }</span>
-			  <input type="text" class="form-control" id="cmtText" placeholder="Add Comment..." aria-label="Username" aria-describedby="basic-addon1">
-			  <button type="button" id="cmtAddBtn" class="btn btn-success">post</button>
+			<div class="mb-3 my-3 align-items-center row">
+			  <span class="col-2" id="cmtWriter">${authNick }</span>
+			  <div class="inputBx col-8">
+				  <span></span>
+				  <input type="text" class="form-control" id="cmtText" placeholder="Add Comment..." aria-label="Username" aria-describedby="basic-addon1">
+			  </div>
+			  <div class="inputBx col-2">
+				  <button type="button" id="cmtAddBtn" class="filledBg">post</button>
+			  </div>
 			</div>
 		</sec:authorize>
 		
@@ -115,7 +128,7 @@
 	</div>
 <script type="text/javascript">
 	const bnoValue = `<c:out value="${board.bno}" />`;
-	const loginNick = `<c:out value="${authNick}" />`;
+	const loginEmail = `<c:out value="${authEmail}" />`;
 </script>
 <script type="text/javascript" src="/resources/js/boardDetailComment.js"></script>
 <script type="text/javascript">

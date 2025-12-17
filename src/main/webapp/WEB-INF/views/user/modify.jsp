@@ -4,7 +4,7 @@
 <%@ taglib uri="http://www.springframework.org/security/tags" prefix="sec" %>
 <jsp:include page="../layout/header.jsp" />
 	<div class="container-sm p-5 mb-5">
-		<h3>User Modify Page</h3>
+		<h3>회원정보수정</h3>
 		<!-- 이 페이지는 로그인이 되어있어야지만 접근할 수 있는 페이지 -->
 		<sec:authentication property="principal.userVO" var="user"/>
 		

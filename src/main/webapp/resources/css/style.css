@@ -1,0 +1,394 @@
+@charset "UTF-8";
+body{
+	background-color : #222;
+	color : #01dbc2;
+}
+body, input, select, button, a, textarea{
+	cursor: none !important;
+}
+#cursor{
+	position: fixed;
+	width: 15px;
+	height: 15px;
+	border-top: 3px solid #01dbc2;
+	border-left: 3px solid #01dbc2;
+	transform-origin: top;
+	transform: translate(-1px,5px) rotate(15deg) scale(0);
+	transition: transform 0.1s;
+	pointer-events: none;
+	z-index: 999999;
+}
+#cursor::before{
+	content: '';
+	position: absolute;
+	left: -1.5px;
+	width: 3px;
+	height: 25px;
+	background: #01dbc2;
+	transform-origin: top;
+	transform: rotate(315deg);
+}
+body:hover #cursor{
+	transform: translate(-1px,5px) rotate(15deg) scale(1);
+	filter: drop-shadow(0 0 5px #01dbc2) drop-shadow(0 0 15px #01dbc2) drop-shadow(0 0 30px #01dbc2);
+}
+footer{
+	background-color: #111;
+}
+nav{
+	background-color: #111;
+}
+nav a{
+	color: #fff;
+}
+.header-ul{
+	width: 100%;
+	display: flex;
+	justify-content: space-between;
+}
+.header-ul>div{
+	display: flex;
+}
+.header-ul a{
+	color: #fff;
+}
+.navbar-brand{
+	color: #fff;
+}
+.navbar-brand:hover, .nav-link:hover{
+	color: #01dbc2;
+}
+
+.mainContainer{
+	position: relative;
+	height: calc(100vh - 128px);
+	min-height: 500px;
+	display: flex;
+	justify-content: space-around;
+	align-items: center;
+}
+.mainContainer>div{
+	width: 50%;
+	height: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.mainContainer>div a{
+	width: 200px;
+	height: 60px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	color: #01dbc2;
+	border: 1px solid #01dbc2;
+	text-decoration: none;
+	font-size: 20px;
+}
+.mainContainer>div a::before{
+	content: '';
+	width: 202px;
+	height: 62px;
+	position: absolute;
+
+}
+.mainTime{
+	position: absolute;
+	bottom: 0;
+	left: 50%;
+	transform: translateX(-50%);
+	font-weight: bold;
+	font-size: 20px;
+}
+.loginBox{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: calc(100vh - 128px);
+	min-height: 500px;
+}
+@property --a{
+	syntax: '<angle>';
+	inherits: false;
+	initial-value: 0deg;
+}
+.animatedBox{
+	width: 100%;
+	height: 100%;
+	padding: 20px;
+	position: relative;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	background: repeating-conic-gradient(from var(--a), #01dbc2 0%, #01dbc2 10%, transparent 10%, transparent 50%);
+	animation: animate 6s linear infinite;
+}
+@keyframes animate {
+	0%{
+		--a: 0deg
+	}
+	100%{
+		--a: 360deg
+	}
+}
+.animatedBox::before{
+	content: '';
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	background: repeating-conic-gradient(from var(--a), #01dbc2 0%, #01dbc2 10%, transparent 10%, transparent 50%);
+	animation: animate 6s linear infinite;
+	animation-delay: -1.5s;
+}
+.animatedBox::after{
+	content: '';
+	position: absolute;
+	inset: 2px;
+	border: 20px solid #222;
+	background: #303030;
+}
+.loginBox .animatedBox{
+	width: 400px;
+	height: fit-content;
+}
+.animatedBox.registerBox{
+	width: 90%;
+	max-width: 1000px;
+	padding: 60px;
+}
+.loginBox form{
+	position: relative;
+	z-index: 10;
+}
+.registerBox form{
+	display: flex;
+	width: 100%;
+}
+.loginBox form h1{
+	color: #fff;
+	font-weight: 500;
+	margin-bottom: 20px;
+	padding-top: 60px;
+	width: 100%;
+	text-align: center;
+	letter-spacing: 0.1em;
+	text-transform: uppercase;
+}
+.registerBox form h1{
+	width: 50%;
+}
+.registerBox form>div{
+	width: 50%;
+}
+.inputBx{
+	position: relative;
+	/* width: 240px; */
+	margin: 6px 6px 40px 6px;
+}
+.inputBx>span:first-child{
+	position: absolute;
+	inset: -2px;
+	z-index: 1;
+}
+.inputBx>span:first-child::before{
+	content: '';
+	position: absolute;
+	inset: -2px;
+	background: repeating-conic-gradient(from var(--a), #01dbc2 0%, #01dbc2 10%, transparent 10%, transparent 50%);
+	animation: animate 6s linear infinite;
+	box-shadow: 0 0 0 2px #000;
+}
+.inputBx>span:first-child::before{
+	animation-delay: -1.5s;
+}
+.inputBx>span:first-child::after{
+	content: '';
+	position: absolute;
+	inset: 0;
+	background: #292929;
+}
+.inputBx input{
+	position: relative;
+	z-index: 200;
+	outline: none;
+	border: none;
+	width: 100%;
+	padding: 8px 14px;
+	background: transparent;
+	color: #fff;
+	letter-spacing: 0.1em;
+}
+.inputBx input:focus{
+	background-color: transparent;
+	color: #fff;
+}
+.inputBx input::placeholder{
+	color: #fff;
+	opacity: 0.5;
+}
+.inputBx button{
+	cursor: pointer;
+	border: 0;
+	padding: 8px 14px;
+	width: 100%;
+	font-weight: 500;
+	color: #292929;
+}
+.registerBox form .inputBx{
+	width: 89%;
+}
+.registerBox form>div>.inputBx:last-child{
+	margin-bottom: 0;
+}
+.inputBx>*{
+	position: relative;
+	z-index: 1;
+}
+.inputBx input:read-only ~ span::before{
+	content: none;
+}
+.inputBx.inputBx-flex{
+	display: flex;
+	align-items: center;
+}
+.detail-inputBx-container .inputBx{
+	&:first-child{
+		width: 100px;
+	}
+	&:nth-child(2){
+		width: calc(100% - 570px);
+		input{
+			font-weight: bold;
+		}
+	}
+	&:nth-child(3){
+		width: 150px;
+	}
+	&:nth-child(4){
+		width: 220px;
+	}
+	&:last-child{
+		width: 100px;
+	}
+}
+.filledBg{
+	background: #01dbc2;
+	box-shadow: 0 0 0 4px #01dbc2;
+	filter: drop-shadow(0 0 15px #01dbc2);
+}
+.filledBg:hover{
+	background: #01c3ac;
+}
+.group{
+	position: relative;
+	top: -10px;
+	padding-bottom: 60px;
+	display: flex;
+	justify-content: center;
+}
+.group a{
+	text-decoration: none;
+	color: #fff8;
+	letter-spacing: 0.1em;
+	font-size: 0.75em;
+}
+.group a:hover{
+	color: #01dbc2;
+	filter: drop-shadow(0 0 15px #01dbc2);
+}
+.boardList .inputBx select, .boardList .inputBx input{
+	position: relative;
+	z-index: 1;
+	border: 0;
+	background: transparent;
+	color: #fff;
+}
+.animatedBox table{
+	position: relative;
+	z-index: 1;
+	margin: 0;
+}
+.boardList{}
+.boardList select, .boardList input, .boardList th, .boardList td{
+	background: transparent;
+	color: #fff;
+}
+.boardList select option{
+	color: #000;
+}
+.boardList tr{
+	border-color: #444;
+}
+.boardList th, .boardList td{
+	height: 50px;
+	text-align: center;
+	vertical-align: middle;
+}
+.boardList th{
+	text-transform: uppercase;
+}
+.boardList th:first-child, .boardList td:first-child{
+	width: 100px;
+}
+.boardList th:nth-child(2), .boardList td:nth-child(2){
+
+}
+.boardList td:nth-child(2){
+	text-align: left;
+}
+.boardList th:nth-child(3), .boardList td:nth-child(3){
+	width: 150px;
+}
+.boardList th:nth-child(4), .boardList td:nth-child(4){
+	width: 200px;
+}
+.boardList th:last-child, .boardList td:last-child{
+	width: 100px;
+}
+.boardList nav{
+	background-color: transparent;
+}
+.page-link, .disabled .page-link{
+	background-color: transparent;
+	color: #aaaaaa;
+	border: none;
+}
+.disabled .page-link{
+	display: none;
+}
+.page-link:hover{
+	background-color: transparent;
+	color: #01dbc2;
+}
+.page-link.active{
+	background-color: transparent;
+	color: #01dbc2;
+	font-weight: bold;
+}
+.detailBox textarea{
+	background-color: transparent;
+	color: #fff;
+	width: 100%;
+	min-height: 100px;
+	height: fit-content;
+	resize: none;
+	border: 1px solid #666;
+}
+.detailBox textarea:focus{
+	background-color: transparent;
+	color: #fff;
+}
+.detailBox .list-group-item{
+	background-color: transparent;
+	color: #fff;
+	border-bottom-color: #444;
+}
+.detailBox>div>a{
+	margin: 0 5px;
+}
+.row .inputBx{
+	margin: 0;
+}
+.cus-color{
+	color: #01dbc2;
+}
